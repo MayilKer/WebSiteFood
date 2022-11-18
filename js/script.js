@@ -237,9 +237,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
            const statusMessage = document.createElement('img');
            statusMessage.src = message.loading;
-           statusMessage.style.cssText
+           statusMessage.style.cssText = `
+           display: block;
+           margin: 0 auto;
+           `;
            statusMessage.textContent = message.loading;
-           form.appendChild(statusMessage);
+           form.insertAdjacentElement('afterend', statusMessage);
 
            const request = new XMLHttpRequest();
            request.open('POST', 'server.php');
