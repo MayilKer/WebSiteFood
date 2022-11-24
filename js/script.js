@@ -293,14 +293,4 @@ window.addEventListener('DOMContentLoaded', () => {
             closeModalWindow();
         },4000);
     }
-
-    fetch('https://jsonplaceholder.typicode.com/todos/posts',{
-        method: "POST",
-        body: JSON.stringify({name: 'Alex'}),
-        headers: {  
-            'Content-type': 'aplication/json'
-        }
-    })
-        .then(response => response.json())
-        .then(json => console.log(json));
 });
