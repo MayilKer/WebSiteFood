@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/MayilKer/WebSiteFood/issues"
   },
-  "homepage": "https://github.com/MayilKer/WebSiteFood#readme"
+  "homepage": "https://github.com/MayilKer/WebSiteFood#readme",
+  "devDependencies": {
+    "json-server": "^0.17.1"
+  }
 }
