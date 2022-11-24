@@ -231,6 +231,18 @@ window.addEventListener('DOMContentLoaded', () => {
         postData(elem);
     });
 
+    const postDataFunc = async (url, data) => {
+        let request = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: data
+           });
+
+           return await request.json();
+    };
+
     function postData(form){
         form.addEventListener('submit', (e) => {
            e.preventDefault(); 
@@ -244,24 +256,21 @@ window.addEventListener('DOMContentLoaded', () => {
            statusMessage.textContent = message.loading;
            form.insertAdjacentElement('afterend', statusMessage);
            
-           const formData = new FormData(form);
-           const object = {};
-           formData.forEach(function(value, key){
-            object[key] = value;
-           });
+                   
+           const formData = new FormData(form); 
 
-           fetch('server.php', {
-            method: 'POST',
-            headers: {'Content-type' : 'aplication/json'},
-            body: JSON.stringify(object)
-           }).then(data => data.text())
-           .then(response => {
-                console.log(response);
+           const json = JSON.stringify(Object.fromEntries(formData.entries()));
+
+           postDataFunc('http://localhost:3000/requests', json)
+            .then(data => {
+                console.log(data);
                 showThanksModal(message.success);
-                form.reset();
                 statusMessage.remove();
-           }).catch(() => showThanksModal(message.failure))
-           .finally(() => form.reset());
+            }).catch(() => {
+                showThanksModal(message.failure);
+            }).finally(() => {
+                form.reset();
+            });
 
 
         });
