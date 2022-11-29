@@ -197,12 +197,47 @@ window.addEventListener('DOMContentLoaded', () => {
            return await request.json();
     };
 
-    getResources('http://localhost:3000/menu')
-          .then(data => {
-            data.forEach(({img, altimg, price, title, descr}) => {
-                new MenuCard(img, altimg, price, title, descr, '.menu .container').render();
-            });
-          });
+
+    // getResources('http://localhost:3000/menu')
+    //       .then(data => createCard(data));
+
+
+    // function createCard(data){
+    //     data.forEach(({img, altimg, price, title, descr}) => {
+    //         const element = document.createElement('div');
+
+    //         element.classList.add('menu__item');
+    //         price *= 27;
+    //         element.innerHTML = `
+    //         <img src="${img}" alt="${altimg}">
+    //         <h3 class="menu__item-subtitle">${title}</h3>
+    //         <div class="menu__item-descr">${descr}</div>
+    //         <div class="menu__item-divider"></div>
+    //         <div class="menu__item-price">
+    //             <div class="menu__item-cost">Цена:</div>
+    //             <div class="menu__item-total"><span>${price}</span> грн/день</div>
+    //         </div>
+    //         `;
+
+    //         document.querySelector('.menu .container').append(element);
+    //     });
+    // }
+    
+          
+    // getResources('http://localhost:3000/menu')
+    //       .then(data => {
+    //         data.forEach(({img, altimg, price, title, descr}) => {
+    //             new MenuCard(img, altimg, price, title, descr, '.menu .container').render();
+    //         });
+    //       });
+
+
+    axios.get('http://localhost:3000/menu')
+             .then(data => {
+                data.data.forEach(({img, altimg, price, title, descr}) => {
+                    new MenuCard(img, altimg, price, title, descr, '.menu .container').render();
+                });
+             });
 
     // Forms
 
@@ -293,4 +328,97 @@ window.addEventListener('DOMContentLoaded', () => {
     fetch('http://localhost:3000/menu')
         .then(data => data.json())
         .then(response => console.log(response));
+
+
+
+    // Slider
+
+    const slides = document.querySelectorAll('.offer__slide'),
+          prev = document.querySelector('.offer__slider-prev'),
+          next = document.querySelector('.offer__slider-next'),
+          current = document.querySelector('#current'),
+          total = document.querySelector('#total'),
+          slidesWrapper = document.querySelector('.offer__slider-wrapper'),
+          slidesField = document.querySelector('.offer__slider-inner'),
+          width = window.getComputedStyle(slidesWrapper).width;
+
+
+
+    let slideIndex = 1;
+    let offset = 0;
+    
+    slidesField.style.width = 100 * slides.length + '%';
+    slidesField.style.display = 'flex';
+    slidesField.style.transition = '0.5s all';
+    slidesWrapper.style.overflow = 'hidden';
+
+    slides.forEach(slide => {
+        slide.style.width = width;
+    });
+
+    next.addEventListener('click', () => {
+        if(offset == (+width.slice(0, width.length - 2) * (slides.length - 1))){
+            offset = 0;
+        }else{
+            offset += +width.slice(0, width.length - 2);
+        }
+
+        slidesField.style.transform = `translate(-${offset}px)`;
+    });
+
+    prev.addEventListener('click', () => {
+        if(offset == 0){
+            offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+        }else{
+            offset -= +width.slice(0, width.length - 2);
+        }
+        slidesField.style.transform = `translateX(-${offset}px)`;
+    });
+
+
+
+
+
+
+
+    // if(slides.length < 10){
+    //     total.textContent = `0${slides.length}`;
+    // }else{
+    //     total.textContent = slides.length;
+    // }
+    // showSlides(slideIndex);
+
+    // function showSlides(n){
+    //     if(n > slides.length){
+    //         slideIndex = 1;
+    //     }
+
+    //     if(n < 1){
+    //         slideIndex = slides.length;
+    //     }
+
+    //     slides.forEach(item => item.style.display = 'none');
+
+    //     slides[slideIndex - 1].style.display = 'block';
+
+    //     if(slides.length < 10){
+    //         current.textContent = `0${slideIndex}`;
+    //     }else{
+    //         current.textContent = slideIndex;
+    //     }
+    // }
+
+    // function plusSlides(n){
+    //     showSlides(slideIndex += n);
+    // }
+
+    // prev.addEventListener('click', () => {
+    //     plusSlides(-1);
+    // });
+
+    // next.addEventListener('click', () => {
+    //     plusSlides(1);
+    // });
+
+
 });
