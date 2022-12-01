@@ -348,6 +348,9 @@ window.addEventListener('DOMContentLoaded', () => {
     let slideIndex = 1;
     let offset = 0;
 
+    function calcInReg(width){
+        return width.replace(/\D/g, '');
+    }
     
     if(slides.length < 10){
         total.textContent = `0${slides.length}`;
@@ -405,7 +408,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
     next.addEventListener('click', () => {
-        if(offset == (+width.slice(0, width.length - 2) * (slides.length - 1))){
+        if(offset == (+calcInReg(width) * (slides.length - 1))){
             offset = 0;
         }else{
             offset += +width.slice(0, width.length - 2);
@@ -426,7 +429,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     prev.addEventListener('click', () => {
         if(offset == 0){
-            offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+            offset = +calcInReg(width) * (slides.length - 1);
         }else{
             offset -= +width.slice(0, width.length - 2);
         }
@@ -447,7 +450,7 @@ window.addEventListener('DOMContentLoaded', () => {
             const slideTo = e.target.getAttribute('data-slide-to');
             slideIndex = slideTo;
 
-            offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+            offset = +calcInReg(width) * (slideTo - 1);
             slidesField.style.transform = `translateX(-${offset}px)`;
             checkQuan();
             dotConfig();
