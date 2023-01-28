@@ -1,5 +1,5 @@
 function showTime(){
-    const deadLine = '2023-01-01';
+    const deadLine = '2023-12-18';
 
     function getTimeRemaining(endtime){
 
@@ -63,4 +63,4 @@ function showTime(){
     setClock('.timer',deadLine);
 }
 
-module.exports = showTime;
+export default showTime;

@@ -1,17 +1,20 @@
-"use strict";
-window.addEventListener('DOMContentLoaded', () => {
-    
-    const tabs = require('./modules/tab'),
-          timer = require('./modules/timeMenu'),
-          pop = require('./modules/popup'),
-          card = require('./modules/card'),
-          slider = require('./modules/slider'),
-          calculate = require('./modules/calculator');
+import tabs from './modules/tab.js';
+import timer from './modules/timeMenu.js';
+import modal from './modules/modal.js';
+import card from './modules/card.js'; 
+import slider from './modules/slider.js';
+import form from './modules/form.js';
+import calculate from './modules/calculator.js';
+import { openModalWindow } from './modules/modal.js';
 
+window.addEventListener('DOMContentLoaded', () => {
+
+    const modalTimer = setTimeout(() => openModalWindow(".modal", modalTimer), 5000);
 
     tabs();
     timer();
-    pop();
+    modal('[data-modal]','.modal',modalTimer);
+    form('.modal' ,modalTimer);
     card();
     slider();
     calculate();

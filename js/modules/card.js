@@ -91,4 +91,4 @@ function cardSet(){
     //          });
 }
 
-module.exports = cardSet;
+export default cardSet;

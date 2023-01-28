@@ -107,4 +107,4 @@ function calculate () {
     dynamicInputCheck('#age');
 }
 
-module.exports = calculate;
+export default calculate;
