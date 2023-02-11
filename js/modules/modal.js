@@ -4,22 +4,16 @@ function openModalWindow(modalSelector, modalTimer){
     modal.classList.remove('hide');
     document.body.style.overflow = 'hidden';
 
-    console.log(modalTimer);
-
     if(modalTimer) {
         clearInterval(modalTimer);
     }
 }
 
-function closeModalWindow(modalSelector, modalTimer){
+function closeModalWindow(modalSelector){
     const modal = document.querySelector(modalSelector);
     modal.classList.add('hide');
     modal.classList.remove('show');
     document.body.style.overflow = '';
-    console.log(modalTimer);
-    if(modalTimer) {
-        clearInterval(modalTimer);
-    }
 }
 function modal(triggerSelector, modalSelector, modalTimer){
     

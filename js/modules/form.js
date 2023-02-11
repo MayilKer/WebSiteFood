@@ -2,14 +2,14 @@ import { closeModalWindow, openModalWindow } from "./modal.js";
 import { postData } from "../services/services.js";
 
 function form(formsSelector, modalTimerId) {
-    const forms = document.querySelectorAll(formsSelector);
+    const form = document.querySelectorAll(formsSelector);
     const message = {
         loading: 'img/form/spinner.svg',
         success: 'Спасибо! Скоро мы с вами свяжемся',
         failure: 'Что-то пошло не так...'
     };
 
-    forms.forEach(item => {
+    form.forEach(item => {
         bindPostData(item);
     });
 

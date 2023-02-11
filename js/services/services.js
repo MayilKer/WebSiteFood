@@ -6,7 +6,6 @@ const postData = async (url, data) => {
         },
         body: data
     });
-
     return await res.json();
 };
 

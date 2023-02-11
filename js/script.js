@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
     tabs();
     timer();
     modal('[data-modal]','.modal',modalTimer);
-    form('.modal' ,modalTimer);
+    form('form' ,modalTimer);
     card();
     slider();
     calculate();
